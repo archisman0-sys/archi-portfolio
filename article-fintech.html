@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Building a Lending Vertical Inside an Edtech Company — Archisman Sarkar</title>
+<meta name="description" content="How we built Edvoy Funds from zero — convincing 20+ banking partners to lend £24M to international students they had never met. The three-sided trust problem."/>
+<meta property="og:title" content="Building a Lending Vertical Inside an Edtech Company — Archisman Sarkar"/>
+<meta property="og:description" content="Students who need money. Banks who don't know them. Universities who need guarantees. The story of building Edvoy Funds."/>
+<meta property="og:url" content="https://reacharchisman.com/article-fintech.html"/>
+<meta property="og:type" content="article"/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500&family=Playfair+Display:ital,wght@0,700;1,700&display=swap" rel="stylesheet"/>
+<style>
+:root{--bg:#faf8f0;--surface:#ffffff;--ink:#0d1b3e;--ink2:#1e293b;--muted:#64748b;--faint:#94a3b8;--indigo:#1a56db;--amber:#e8c84a;--border:#ddd8c4;--border2:#c8c0a0;--sh:rgba(13,27,62,0.07);}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{background:var(--bg);color:var(--ink);font-family:'Inter',sans-serif;overflow-x:hidden;}
+nav{position:sticky;top:0;z-index:100;padding:0 52px;height:64px;display:flex;align-items:center;justify-content:space-between;background:rgba(250,248,240,0.92);backdrop-filter:blur(24px);border-bottom:1px solid var(--border);box-shadow:0 1px 12px rgba(13,27,62,0.05);}
+.nav-logo{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:18px;text-decoration:none;color:var(--ink);}
+.nav-logo span{color:var(--indigo);}
+.nav-back{display:flex;align-items:center;gap:8px;font-size:11px;letter-spacing:1px;text-transform:uppercase;color:var(--muted);text-decoration:none;font-weight:500;transition:color .2s;}
+.nav-back:hover{color:var(--indigo);}
+.art-hero{max-width:800px;margin:0 auto;padding:80px 52px 56px;}
+.art-tags{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:24px;}
+.art-tag{padding:4px 12px;background:rgba(26,86,219,0.07);border:1px solid rgba(26,86,219,0.15);border-radius:100px;font-size:10px;letter-spacing:1px;text-transform:uppercase;color:var(--indigo);font-weight:600;}
+.art-title{font-family:'Space Grotesk',sans-serif;font-size:clamp(32px,5vw,52px);font-weight:700;line-height:1.1;letter-spacing:-1.5px;color:var(--ink);margin-bottom:24px;}
+.art-subtitle{font-size:18px;line-height:1.7;color:var(--muted);font-weight:400;margin-bottom:40px;font-family:'Playfair Display',serif;font-style:italic;}
+.art-meta-bar{display:flex;align-items:center;gap:20px;padding:20px 0;border-top:1px solid var(--border);border-bottom:1px solid var(--border);}
+.art-author{display:flex;align-items:center;gap:12px;}
+.art-avatar{width:40px;height:40px;border-radius:50%;background:var(--indigo);display:flex;align-items:center;justify-content:center;font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:14px;color:#fff;flex-shrink:0;}
+.art-author-name{font-size:13px;font-weight:600;color:var(--ink);}
+.art-author-role{font-size:11px;color:var(--faint);}
+.art-meta-right{margin-left:auto;display:flex;gap:20px;}
+.art-meta-item{font-size:11px;color:var(--faint);letter-spacing:.3px;}
+.art-meta-item span{color:var(--muted);font-weight:500;}
+.art-body{max-width:800px;margin:0 auto;padding:56px 52px 80px;}
+.callout{background:rgba(26,86,219,0.05);border-left:4px solid var(--indigo);border-radius:0 12px 12px 0;padding:20px 24px;margin:36px 0;}
+.callout.amber{background:rgba(232,200,74,0.08);border-left-color:var(--amber);}
+.callout.red{background:rgba(220,38,38,0.05);border-left-color:#dc2626;}
+.callout.green{background:rgba(16,185,129,0.06);border-left-color:#10b981;}
+.callout-label{font-size:9px;letter-spacing:2.5px;text-transform:uppercase;font-weight:700;color:var(--indigo);margin-bottom:8px;}
+.callout.amber .callout-label{color:#b45309;}
+.callout.red .callout-label{color:#dc2626;}
+.callout.green .callout-label{color:#10b981;}
+.callout p{font-size:14px;line-height:1.75;color:var(--ink2);}
+.stats-row{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin:36px 0;}
+.stat-box{padding:20px;background:var(--surface);border:1px solid var(--border);border-radius:12px;box-shadow:0 4px 16px var(--sh);text-align:center;}
+.stat-box-n{font-family:'Space Grotesk',sans-serif;font-size:28px;font-weight:700;color:var(--indigo);line-height:1;margin-bottom:6px;}
+.stat-box-l{font-size:10px;letter-spacing:.5px;color:var(--faint);font-weight:500;}
+h2.s{font-family:'Space Grotesk',sans-serif;font-size:24px;font-weight:700;letter-spacing:-.5px;color:var(--ink);margin:52px 0 16px;padding-top:52px;border-top:1px solid var(--border);}
+h2.s:first-of-type{border-top:none;padding-top:0;margin-top:0;}
+h3.ss{font-family:'Space Grotesk',sans-serif;font-size:17px;font-weight:700;color:var(--ink);margin:28px 0 10px;}
+p.body{font-size:15px;line-height:1.9;color:var(--muted);margin-bottom:18px;}
+p.body strong{color:var(--ink);font-weight:600;}
+.num-list{list-style:none;display:flex;flex-direction:column;gap:16px;margin:20px 0 24px;}
+.num-list li{display:flex;gap:16px;font-size:14px;line-height:1.8;color:var(--muted);}
+.num-list li .n{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:13px;color:var(--indigo);flex-shrink:0;width:24px;margin-top:2px;}
+.num-list li strong{color:var(--ink);}
+.impact-table{width:100%;border-collapse:collapse;margin:24px 0;font-size:13px;}
+.impact-table th{text-align:left;padding:10px 16px;background:var(--ink);color:#fff;font-size:10px;letter-spacing:1.5px;text-transform:uppercase;font-weight:600;}
+.impact-table th:first-child{border-radius:8px 0 0 0;}
+.impact-table th:last-child{border-radius:0 8px 0 0;}
+.impact-table td{padding:12px 16px;border-bottom:1px solid var(--border);color:var(--muted);}
+.impact-table td strong{color:var(--ink);}
+.impact-table tr:hover td{background:rgba(26,86,219,0.03);}
+blockquote{margin:40px 0;padding:28px 32px;background:var(--surface);border-radius:12px;border:1px solid var(--border);box-shadow:0 4px 20px var(--sh);position:relative;}
+blockquote::before{content:'\201C';font-family:'Playfair Display',serif;font-size:64px;color:var(--indigo);opacity:.3;position:absolute;top:-12px;left:20px;line-height:1;}
+blockquote p{font-family:'Playfair Display',serif;font-style:italic;font-size:18px;line-height:1.7;color:var(--ink);}
+.outcome-row{display:flex;flex-wrap:wrap;gap:10px;margin:20px 0;}
+.outcome-pill{display:flex;align-items:center;gap:8px;padding:8px 16px;background:rgba(16,185,129,0.07);border:1px solid rgba(16,185,129,0.2);border-radius:100px;font-size:12px;font-weight:500;color:#059669;}
+.learnings{display:flex;flex-direction:column;gap:14px;margin:20px 0;}
+.learning{display:flex;gap:16px;padding:16px 20px;background:var(--surface);border:1px solid var(--border);border-radius:10px;transition:all .2s;}
+.learning:hover{border-color:rgba(26,86,219,0.2);background:rgba(26,86,219,0.03);}
+.learning-num{font-family:'Space Grotesk',sans-serif;font-size:18px;font-weight:700;color:var(--indigo);flex-shrink:0;line-height:1.2;}
+.learning-text{font-size:13px;line-height:1.75;color:var(--muted);}
+.learning-text strong{color:var(--ink);}
+/* Trust triangle */
+.trust-triangle{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin:28px 0;}
+.trust-node{padding:24px;background:var(--surface);border:1px solid var(--border);border-radius:12px;box-shadow:0 4px 16px var(--sh);text-align:center;}
+.trust-node-icon{font-size:28px;margin-bottom:12px;}
+.trust-node-name{font-family:'Space Grotesk',sans-serif;font-size:15px;font-weight:700;color:var(--ink);margin-bottom:8px;}
+.trust-node-pain{font-size:12px;line-height:1.7;color:var(--muted);}
+.trust-node-need{font-size:11px;font-weight:600;color:var(--indigo);margin-top:8px;padding-top:8px;border-top:1px solid var(--border);}
+footer{border-top:1px solid var(--border);padding:32px 52px;display:flex;align-items:center;justify-content:space-between;background:var(--bg);}
+.ft{font-size:10px;color:var(--faint);font-weight:500;}
+.ft span{color:var(--indigo);}
+.footer-nav{display:flex;gap:20px;}
+.footer-nav a{font-size:11px;color:var(--muted);text-decoration:none;letter-spacing:.5px;}
+.footer-nav a:hover{color:var(--indigo);}
+@media(max-width:760px){
+  nav{padding:0 20px;} .art-hero,.art-body{padding:48px 20px;}
+  .stats-row,.trust-triangle{grid-template-columns:repeat(2,1fr);}
+  .trust-triangle .trust-node:last-child{grid-column:span 2;}
+  footer{padding:24px 20px;flex-direction:column;gap:16px;text-align:center;}
+  .footer-nav{flex-wrap:wrap;justify-content:center;}
+  .art-meta-bar{flex-wrap:wrap;gap:12px;}
+  .art-meta-right{margin-left:0;}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">Archi<span>.</span></a>
+  <a href="index.html#insights" class="nav-back">&#8592; Back to Insights</a>
+</nav>
+
+<div class="art-hero">
+  <div class="art-tags">
+    <span class="art-tag">EdFintech</span>
+    <span class="art-tag">Lending</span>
+    <span class="art-tag">Product Strategy</span>
+    <span class="art-tag">0 to 1</span>
+  </div>
+  <h1 class="art-title">Building a Lending Vertical Inside an Edtech Company: The Three-Sided Trust Problem</h1>
+  <p class="art-subtitle">Students who need money. Banks who have never met them. Universities who need guarantees before they issue a CAS. How we built Edvoy Funds from zero &mdash; and what it takes to make three parties trust each other at once.</p>
+  <div class="art-meta-bar">
+    <div class="art-author">
+      <div class="art-avatar">AS</div>
+      <div>
+        <div class="art-author-name">Archisman Sarkar</div>
+        <div class="art-author-role">Director of Product, Edvoy</div>
+      </div>
+    </div>
+    <div class="art-meta-right">
+      <div class="art-meta-item"><span>11 min read</span></div>
+      <div class="art-meta-item"><span>2023</span> &middot; Edvoy</div>
+    </div>
+  </div>
+</div>
+
+<div class="art-body">
+
+  <div class="stats-row">
+    <div class="stat-box"><div class="stat-box-n">&pound;24M</div><div class="stat-box-l">Student funds disbursed</div></div>
+    <div class="stat-box"><div class="stat-box-n">20+</div><div class="stat-box-l">Banking partners onboarded</div></div>
+    <div class="stat-box"><div class="stat-box-n">9mo</div><div class="stat-box-l">Zero to first disbursement</div></div>
+    <div class="stat-box"><div class="stat-box-n">3</div><div class="stat-box-l">Parties whose trust we had to earn simultaneously</div></div>
+  </div>
+
+  <h2 class="s">The Problem That Did Not Exist Until It Did</h2>
+
+  <p class="body">A Nigerian student applying to a UK university can face upfront costs exceeding &pound;30,000 &mdash; tuition deposit, accommodation, visa fees, flights, living expense proof &mdash; before stepping on a plane. <strong>They were academically qualified, had offer letters, had been accepted &mdash; and then the money problem killed the dream.</strong> We could see it in our data: a significant segment dropping off at the financial confirmation stage. Not choosing not to study. Being priced out of a system they had already been accepted into.</p>
+
+  <div class="callout">
+    <div class="callout-label">The Opportunity</div>
+    <p>We sat on something unusual: data on hundreds of thousands of students &mdash; their academic profiles, their chosen universities, their chosen programmes, their visa histories. Data that banks, who had never interacted with these students, did not have. That data asymmetry was the foundation of Edvoy Funds.</p>
+  </div>
+
+  <h2 class="s">The Three-Sided Trust Problem</h2>
+
+  <p class="body">Most fintech products solve a two-sided trust problem: lender and borrower. EdFintech, in the international student lending context, is a three-sided trust problem. Every party has legitimate concerns. Every party needs something from the other two. And none of them trust each other at the start.</p>
+
+  <div class="trust-triangle">
+    <div class="trust-node">
+      <div class="trust-node-icon">&#127891;</div>
+      <div class="trust-node-name">The Student</div>
+      <div class="trust-node-pain">Needs funding quickly, on terms they can afford, without the documentation burden that UK/Australian banks typically require of foreign nationals with no credit history.</div>
+      <div class="trust-node-need">Needs: Fast approval, fair rates, simple process, no home-country collateral demands</div>
+    </div>
+    <div class="trust-node">
+      <div class="trust-node-icon">&#127968;</div>
+      <div class="trust-node-name">The University</div>
+      <div class="trust-node-pain">Needs to confirm that the student is financially viable before issuing a CAS or conditional enrolment letter. A student who cannot pay is a regulatory and financial liability.</div>
+      <div class="trust-node-need">Needs: Evidence of funds, ideally escrowed or committed, before issuing documentation</div>
+    </div>
+    <div class="trust-node">
+      <div class="trust-node-icon">&#127981;</div>
+      <div class="trust-node-name">The Bank</div>
+      <div class="trust-node-pain">Needs confidence that the borrower will repay. A student with no credit history, in a foreign country, with no local income, is a high-risk profile on every standard lending model.</div>
+      <div class="trust-node-need">Needs: Verifiable student quality signal, institutional backing, repayment data from similar cohorts</div>
+    </div>
+  </div>
+
+  <p class="body"><strong>Student cannot get a loan without bank trust. Bank cannot assess trust without data it does not have. University will not issue CAS without financial proof. Student cannot get financial proof without a loan.</strong> A perfect circular dependency, with a real human&apos;s education on the other side of it.</p>
+
+  <blockquote>
+    <p>&ldquo;Every party in the chain was waiting for every other party to move first. Our product had to be the thing that broke the deadlock &mdash; not by removing risk, but by redistributing it in a way that made everyone comfortable enough to act.&rdquo;</p>
+  </blockquote>
+
+  <h2 class="s">How We Broke the Deadlock</h2>
+
+  <h3 class="ss">Step 1: Solve for the bank first</h3>
+
+  <p class="body">We started with banks, not students. Without bank participation, there was no product. The pitch: <strong>&ldquo;we have institutional-grade data on student quality that your standard credit assessment cannot access.&rdquo;</strong> Confirmed offer letters, academic profiles matched against programme completion data, visa intent signals, institutional employment track records. A fundamentally different risk signal than a credit score &mdash; and for banks active in high-sending markets like India, Nigeria, and Pakistan, it was compelling.</p>
+
+  <h3 class="ss">Step 2: Build the data infrastructure before the lending product</h3>
+
+  <p class="body">We spent four months building the <strong>Student Quality Framework</strong> &mdash; combining academic signals, visa intent signals, and destination employment data into an auditable, explainable risk profile. Without this structured, defensible methodology, every bank conversation ended at &ldquo;interesting, but we cannot operationalise it.&rdquo;</p>
+
+  <h3 class="ss">Step 3: Solve the university chicken-and-egg with a commitment letter model</h3>
+
+  <p class="body">Universities needed irrevocable funds. Banks would not commit without a CAS. Classic deadlock. We broke it with a <strong>staged commitment architecture</strong>: banks issued a conditional commitment letter &mdash; legally binding, contingent only on CAS issuance. Universities accepted it because it came from a regulated institution. CAS triggered disbursement. Loop broken. Six months of negotiation with the first three banking partners. Once live, every subsequent conversation moved faster.</p>
+
+  <h2 class="s">Building the Product: What Edvoy Funds Actually Required</h2>
+
+  <p class="body">Simple for students. Complex underneath. Five infrastructure layers made it work:</p>
+
+  <ol class="num-list">
+    <li><div class="n">01</div><div><strong>Application and eligibility engine.</strong> Students needed to apply through Edvoy, not directly to the bank. We built an eligibility pre-screening tool that assessed a student&apos;s profile against the lending criteria of each banking partner before surfacing them as options. Students who were unlikely to be approved were routed to alternative funding sources rather than sent to banks to be declined. Protecting the student experience &mdash; and our conversion rate &mdash; required pre-screening at our layer.</div></li>
+    <li><div class="n">02</div><div><strong>Document orchestration pipeline.</strong> A student funding application required 12&ndash;18 documents: passport, offer letter, academic transcripts, visa evidence, financial statements, and more. We built a document orchestration layer that mapped each document to each bank&apos;s specific format and completeness requirements, validated documents at upload, and packaged them in the exact format each bank&apos;s underwriting team expected. What felt like a single application to the student was simultaneously a correctly-formatted submission to three or four banking partners.</div></li>
+    <li><div class="n">03</div><div><strong>Status and communication engine.</strong> Student lending decisions can take days to weeks. Students in this situation are anxious. Universities have CAS deadlines. Visa application windows are closing. We built a real-time status engine that gave students visibility into exactly where their application was in the banking pipeline, with proactive alerts for any action required on their part. Reducing information asymmetry for the student was as important as the lending decision itself.</div></li>
+    <li><div class="n">04</div><div><strong>Banking partner integration layer.</strong> Each of our 20+ banking partners had different API maturity levels, different document requirements, different decision timelines, and different regulatory environments. Some were fully API-integrated. Some required email-based submission. Some operated only in specific origin countries. We built an abstraction layer that normalised all of this complexity behind a single interface for the student, while maintaining partner-specific logic underneath.</div></li>
+    <li><div class="n">05</div><div><strong>Compliance and regulatory engine.</strong> EdFintech is not just regulated in one jurisdiction. A student in India applying to a UK university through a platform registered in the UK touches RBI guidelines on overseas education loans, UKVI financial evidence requirements, and the FCA&apos;s expectations around credit referral. We mapped the regulatory surface area across every student origin and destination combination we operated in, and built compliance checkpoints into the product flow at every relevant junction.</div></li>
+  </ol>
+
+  <h2 class="s">The Hardest Conversations</h2>
+
+  <h3 class="ss">With banks: data sharing</h3>
+
+  <p class="body">Banks wanted our data but had compliance concerns about using third-party signals in credit decisions. We landed on providing a <strong>derived risk score with documented methodology</strong> &mdash; not raw student data. Banks remained decision-makers; Edvoy was an auditable data provider. This structure became the template for every subsequent partnership.</p>
+
+  <h3 class="ss">With universities: the commitment letter</h3>
+
+  <p class="body">The first time we presented a conditional commitment letter, the admissions office was politely sceptical &mdash; it was not on any standard list of accepted financial evidence. Three months of legal review, bank reference checks, and compliance team meetings later, three universities formally accepted it. The rest followed significantly faster.</p>
+
+  <h2 class="s">What We Learned About Building Fintech Inside Non-Fintech</h2>
+
+  <div class="learnings">
+    <div class="learning">
+      <div class="learning-num">01</div>
+      <div class="learning-text"><strong>Your unfair advantage is the data you already have, not the financial product you want to build.</strong> We were not a better lender than banks. We were a better data source about a specific customer segment. Building Edvoy Funds on that asset &mdash; rather than trying to become a lender ourselves &mdash; was the decision that made it viable. Know what you uniquely own before you decide what to build.</div>
+    </div>
+    <div class="learning">
+      <div class="learning-num">02</div>
+      <div class="learning-text"><strong>In multi-sided trust problems, sequence matters more than speed.</strong> The temptation was to solve everything simultaneously. Every failed attempt to do that taught us the same lesson: pick the party whose trust is the foundation for the others, solve for them completely, and use that solved relationship to unlock the next one. Banks first, then universities, then students at scale.</div>
+    </div>
+    <div class="learning">
+      <div class="learning-num">03</div>
+      <div class="learning-text"><strong>Regulated partnerships require product work, not just business development.</strong> Every banking partnership involved months of compliance review, API integration, documentation mapping, and regulatory alignment. Treating these as BD relationships that legal would close was a mistake. They needed product managers embedded in the partnership process, understanding the bank&apos;s technical and compliance requirements and building specifically to meet them.</div>
+    </div>
+    <div class="learning">
+      <div class="learning-num">04</div>
+      <div class="learning-text"><strong>The user experience of financial products is mostly made up of information architecture.</strong> Students did not care about our banking infrastructure. They cared about knowing where their application was, what was needed from them, and when they would have an answer. The most impactful UX investments we made were in the status engine and proactive communication &mdash; not in the application form design.</div>
+    </div>
+    <div class="learning">
+      <div class="learning-num">05</div>
+      <div class="learning-text"><strong>Adjacent revenue verticals require full product commitment, not side-project resourcing.</strong> Edvoy Funds was not a feature. It was a product with its own regulatory obligations, partner relationships, integration dependencies, and user journeys. Treating it as a side initiative of the core platform team would have killed it. It needed a dedicated product owner, a dedicated engineering pod, and executive sponsorship that protected its roadmap from being deprioritised whenever the core product had a fire drill.</div>
+    </div>
+  </div>
+
+  <h2 class="s">The Outcomes</h2>
+
+  <table class="impact-table">
+    <thead>
+      <tr><th>Metric</th><th>Result</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><strong>Total funds disbursed</strong></td><td>&pound;24M across active banking partnerships</td></tr>
+      <tr><td><strong>Banking partners onboarded</strong></td><td>20+ across UK, India, Nigeria, Pakistan, and other key markets</td></tr>
+      <tr><td><strong>Time to first disbursement</strong></td><td>9 months from product initiation to first student receiving funds</td></tr>
+      <tr><td><strong>University acceptance of commitment letters</strong></td><td>Formally accepted by 40+ partner institutions as valid financial evidence</td></tr>
+      <tr><td><strong>Funnel conversion impact</strong></td><td>Significant reduction in financial confirmation drop-off; measurable increase in enrolment completion rate</td></tr>
+      <tr><td><strong>New revenue stream</strong></td><td>Edvoy Funds became one of 5+ new revenue verticals built during this period</td></tr>
+    </tbody>
+  </table>
+
+  <div class="outcome-row">
+    <div class="outcome-pill">&#10003;&nbsp; &pound;24M disbursed to international students</div>
+    <div class="outcome-pill">&#10003;&nbsp; 20+ banking partners live across key markets</div>
+    <div class="outcome-pill">&#10003;&nbsp; 40+ universities accept commitment letter model</div>
+    <div class="outcome-pill">&#10003;&nbsp; Financial drop-off significantly reduced in funnel</div>
+    <div class="outcome-pill">&#10003;&nbsp; New revenue vertical established from zero in 9 months</div>
+    <div class="outcome-pill">&#10003;&nbsp; Student Quality Framework built as reusable data asset</div>
+  </div>
+
+  <h2 class="s">The Bigger Lesson</h2>
+
+  <p class="body">Building a fintech vertical inside edtech sounds like scope expansion. It was scope clarification. <strong>Edvoy&apos;s job was not to connect students to universities. It was to remove every barrier between a qualified student and their education.</strong> Financial barriers were the most common reason qualified students did not enrol. The broader principle: <strong>the most defensible product expansions solve the next biggest friction in the same user journey, using assets you uniquely own.</strong> We did not build a bank. We built a bridge using data only we had. Three-sided trust problems require patience and sequencing &mdash; but when you solve them, you build something that looks, from the outside, deceptively simple. That is usually the sign the hard work was done right.</p>
+
+  <div style="margin-top:56px;padding-top:32px;border-top:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:20px;">
+    <div>
+      <div style="font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:16px;color:var(--ink);margin-bottom:4px;">Archisman Sarkar</div>
+      <div style="font-size:12px;color:var(--faint);">Director of Product &middot; Edvoy &middot; Hyderabad, India</div>
+      <div style="font-size:12px;color:var(--faint);margin-top:2px;">me@reacharchisman.com</div>
+    </div>
+    <a href="index.html#insights" style="display:inline-flex;align-items:center;gap:8px;padding:12px 24px;background:var(--indigo);color:#fff;text-decoration:none;border-radius:8px;font-size:13px;font-weight:500;font-family:'Inter',sans-serif;">&#8592; Back to Insights</a>
+  </div>
+
+</div>
+
+<footer>
+  <div class="ft">&#169; 2025 Archisman Sarkar &middot; <span>reacharchisman.com</span></div>
+  <div class="footer-nav">
+    <a href="index.html">Home</a>
+    <a href="index.html#about">About</a>
+    <a href="index.html#ai-projects">AI Projects</a>
+    <a href="index.html#insights">Insights</a>
+    <a href="index.html#contact">Contact</a>
+  </div>
+</footer>
+
+</body>
+</html>

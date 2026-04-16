@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Zero to 32: How I Built a Full ERP in 12 Months — Archisman Sarkar</title>
+<meta name="description" content="How I built a 32-module ERP from scratch at Colive with a team of 6 in 12 months, driving 550% revenue growth. A product case study by Archisman Sarkar."/>
+<meta property="og:title" content="Zero to 32: How I Built a Full ERP in 12 Months — Archisman Sarkar"/>
+<meta property="og:description" content="Colive was scaling fast and the spreadsheet model was breaking. Here is how we built a 32-module ERP that drove 550% revenue growth."/>
+<meta property="og:url" content="https://reacharchisman.com/article-erp.html"/>
+<meta property="og:type" content="article"/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500&family=Playfair+Display:ital,wght@0,700;1,700&display=swap" rel="stylesheet"/>
+<style>
+:root{
+  --bg:#faf8f0;--surface:#ffffff;--ink:#0d1b3e;--ink2:#1e293b;
+  --muted:#64748b;--faint:#94a3b8;
+  --indigo:#1a56db;--amber:#e8c84a;--border:#ddd8c4;--border2:#c8c0a0;
+  --sh:rgba(13,27,62,0.07);
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{background:var(--bg);color:var(--ink);font-family:'Inter',sans-serif;overflow-x:hidden;}
+nav{position:sticky;top:0;z-index:100;padding:0 52px;height:64px;display:flex;align-items:center;justify-content:space-between;background:rgba(250,248,240,0.92);backdrop-filter:blur(24px);border-bottom:1px solid var(--border);box-shadow:0 1px 12px rgba(13,27,62,0.05);}
+.nav-logo{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:18px;text-decoration:none;color:var(--ink);}
+.nav-logo span{color:var(--indigo);}
+.nav-back{display:flex;align-items:center;gap:8px;font-size:11px;letter-spacing:1px;text-transform:uppercase;color:var(--muted);text-decoration:none;font-weight:500;transition:color .2s;}
+.nav-back:hover{color:var(--indigo);}
+.art-hero{max-width:800px;margin:0 auto;padding:80px 52px 56px;}
+.art-tags{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:24px;}
+.art-tag{padding:4px 12px;background:rgba(26,86,219,0.07);border:1px solid rgba(26,86,219,0.15);border-radius:100px;font-size:10px;letter-spacing:1px;text-transform:uppercase;color:var(--indigo);font-weight:600;}
+.art-title{font-family:'Space Grotesk',sans-serif;font-size:clamp(32px,5vw,52px);font-weight:700;line-height:1.1;letter-spacing:-1.5px;color:var(--ink);margin-bottom:24px;}
+.art-subtitle{font-size:18px;line-height:1.7;color:var(--muted);font-weight:400;margin-bottom:40px;font-family:'Playfair Display',serif;font-style:italic;}
+.art-meta-bar{display:flex;align-items:center;gap:20px;padding:20px 0;border-top:1px solid var(--border);border-bottom:1px solid var(--border);}
+.art-author{display:flex;align-items:center;gap:12px;}
+.art-avatar{width:40px;height:40px;border-radius:50%;background:var(--indigo);display:flex;align-items:center;justify-content:center;font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:14px;color:#fff;flex-shrink:0;}
+.art-author-name{font-size:13px;font-weight:600;color:var(--ink);}
+.art-author-role{font-size:11px;color:var(--faint);}
+.art-meta-right{margin-left:auto;display:flex;gap:20px;}
+.art-meta-item{font-size:11px;color:var(--faint);letter-spacing:.3px;}
+.art-meta-item span{color:var(--muted);font-weight:500;}
+.art-body{max-width:800px;margin:0 auto;padding:56px 52px 80px;}
+.callout{background:rgba(26,86,219,0.05);border-left:4px solid var(--indigo);border-radius:0 12px 12px 0;padding:20px 24px;margin:36px 0;}
+.callout.amber{background:rgba(232,200,74,0.08);border-left-color:var(--amber);}
+.callout.red{background:rgba(220,38,38,0.05);border-left-color:#dc2626;}
+.callout.green{background:rgba(16,185,129,0.06);border-left-color:#10b981;}
+.callout-label{font-size:9px;letter-spacing:2.5px;text-transform:uppercase;font-weight:700;color:var(--indigo);margin-bottom:8px;}
+.callout.amber .callout-label{color:#b45309;}
+.callout.red .callout-label{color:#dc2626;}
+.callout.green .callout-label{color:#10b981;}
+.callout p{font-size:14px;line-height:1.75;color:var(--ink2);}
+.stats-row{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin:36px 0;}
+.stat-box{padding:20px;background:var(--surface);border:1px solid var(--border);border-radius:12px;box-shadow:0 4px 16px var(--sh);text-align:center;}
+.stat-box-n{font-family:'Space Grotesk',sans-serif;font-size:28px;font-weight:700;color:var(--indigo);line-height:1;margin-bottom:6px;}
+.stat-box-l{font-size:10px;letter-spacing:.5px;color:var(--faint);font-weight:500;}
+h2.s{font-family:'Space Grotesk',sans-serif;font-size:24px;font-weight:700;letter-spacing:-.5px;color:var(--ink);margin:52px 0 16px;padding-top:52px;border-top:1px solid var(--border);}
+h2.s:first-of-type{border-top:none;padding-top:0;margin-top:0;}
+h3.ss{font-family:'Space Grotesk',sans-serif;font-size:17px;font-weight:700;color:var(--ink);margin:28px 0 10px;}
+p.body{font-size:15px;line-height:1.9;color:var(--muted);margin-bottom:18px;}
+p.body strong{color:var(--ink);font-weight:600;}
+.num-list{list-style:none;display:flex;flex-direction:column;gap:16px;margin:20px 0 24px;}
+.num-list li{display:flex;gap:16px;font-size:14px;line-height:1.8;color:var(--muted);}
+.num-list li .n{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:13px;color:var(--indigo);flex-shrink:0;width:24px;margin-top:2px;}
+.num-list li strong{color:var(--ink);}
+.impact-table{width:100%;border-collapse:collapse;margin:24px 0;font-size:13px;}
+.impact-table th{text-align:left;padding:10px 16px;background:var(--ink);color:#fff;font-size:10px;letter-spacing:1.5px;text-transform:uppercase;font-weight:600;}
+.impact-table th:first-child{border-radius:8px 0 0 0;}
+.impact-table th:last-child{border-radius:0 8px 0 0;}
+.impact-table td{padding:12px 16px;border-bottom:1px solid var(--border);color:var(--muted);}
+.impact-table td strong{color:var(--ink);}
+.impact-table tr:hover td{background:rgba(26,86,219,0.03);}
+blockquote{margin:40px 0;padding:28px 32px;background:var(--surface);border-radius:12px;border:1px solid var(--border);box-shadow:0 4px 20px var(--sh);position:relative;}
+blockquote::before{content:'\201C';font-family:'Playfair Display',serif;font-size:64px;color:var(--indigo);opacity:.3;position:absolute;top:-12px;left:20px;line-height:1;}
+blockquote p{font-family:'Playfair Display',serif;font-style:italic;font-size:18px;line-height:1.7;color:var(--ink);}
+.outcome-row{display:flex;flex-wrap:wrap;gap:10px;margin:20px 0;}
+.outcome-pill{display:flex;align-items:center;gap:8px;padding:8px 16px;background:rgba(16,185,129,0.07);border:1px solid rgba(16,185,129,0.2);border-radius:100px;font-size:12px;font-weight:500;color:#059669;}
+.learnings{display:flex;flex-direction:column;gap:14px;margin:20px 0;}
+.learning{display:flex;gap:16px;padding:16px 20px;background:var(--surface);border:1px solid var(--border);border-radius:10px;transition:all .2s;}
+.learning:hover{border-color:rgba(26,86,219,0.2);background:rgba(26,86,219,0.03);}
+.learning-num{font-family:'Space Grotesk',sans-serif;font-size:18px;font-weight:700;color:var(--indigo);flex-shrink:0;line-height:1.2;}
+.learning-text{font-size:13px;line-height:1.75;color:var(--muted);}
+.learning-text strong{color:var(--ink);}
+/* Module grid */
+.module-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:28px 0;}
+.module-chip{padding:10px 14px;background:var(--surface);border:1px solid var(--border);border-radius:8px;font-size:11px;font-weight:500;color:var(--muted);transition:all .2s;}
+.module-chip:hover{border-color:rgba(26,86,219,0.2);color:var(--indigo);background:rgba(26,86,219,0.04);}
+.module-chip .mc-cat{font-size:8px;letter-spacing:1.5px;text-transform:uppercase;color:var(--faint);margin-bottom:4px;}
+footer{border-top:1px solid var(--border);padding:32px 52px;display:flex;align-items:center;justify-content:space-between;background:var(--bg);}
+.ft{font-size:10px;color:var(--faint);font-weight:500;}
+.ft span{color:var(--indigo);}
+.footer-nav{display:flex;gap:20px;}
+.footer-nav a{font-size:11px;color:var(--muted);text-decoration:none;letter-spacing:.5px;}
+.footer-nav a:hover{color:var(--indigo);}
+@media(max-width:760px){
+  nav{padding:0 20px;} .art-hero,.art-body{padding:48px 20px;}
+  .stats-row{grid-template-columns:repeat(2,1fr);}
+  .module-grid{grid-template-columns:repeat(2,1fr);}
+  footer{padding:24px 20px;flex-direction:column;gap:16px;text-align:center;}
+  .footer-nav{flex-wrap:wrap;justify-content:center;}
+  .art-meta-bar{flex-wrap:wrap;gap:12px;}
+  .art-meta-right{margin-left:0;}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">Archi<span>.</span></a>
+  <a href="index.html#insights" class="nav-back">&#8592; Back to Insights</a>
+</nav>
+
+<div class="art-hero">
+  <div class="art-tags">
+    <span class="art-tag">ERP</span>
+    <span class="art-tag">Proptech</span>
+    <span class="art-tag">0 to 1</span>
+    <span class="art-tag">Enterprise SaaS</span>
+  </div>
+  <h1 class="art-title">Zero to 32: How I Built a Full ERP in 12 Months with a Team of 6</h1>
+  <p class="art-subtitle">Colive was scaling fast and the spreadsheet-and-WhatsApp operating model was cracking under the weight of growth. Here is how we designed, built, and shipped a 32-module ERP from scratch &mdash; and what it did to the business.</p>
+  <div class="art-meta-bar">
+    <div class="art-author">
+      <div class="art-avatar">AS</div>
+      <div>
+        <div class="art-author-name">Archisman Sarkar</div>
+        <div class="art-author-role">Head of Product, Colive (Sattva Group)</div>
+      </div>
+    </div>
+    <div class="art-meta-right">
+      <div class="art-meta-item"><span>10 min read</span></div>
+      <div class="art-meta-item"><span>2020</span> &middot; Colive</div>
+    </div>
+  </div>
+</div>
+
+<div class="art-body">
+
+  <div class="stats-row">
+    <div class="stat-box"><div class="stat-box-n">32</div><div class="stat-box-l">ERP modules shipped</div></div>
+    <div class="stat-box"><div class="stat-box-n">550%</div><div class="stat-box-l">Revenue growth driven post-launch</div></div>
+    <div class="stat-box"><div class="stat-box-n">86%</div><div class="stat-box-l">Retention rate increase</div></div>
+    <div class="stat-box"><div class="stat-box-n">12mo</div><div class="stat-box-l">From first line of code to production</div></div>
+  </div>
+
+  <h2 class="s">The Starting Point: A Business Running on Chaos</h2>
+
+  <p class="body">When I joined Colive as Head of Product, one of India&apos;s largest co-living operators, the business was growing fast and the operational infrastructure was not keeping up. <strong>Excel sheets for billing, WhatsApp groups for maintenance, manual registers for move-ins, email threads for vendor management.</strong> Every team had built their own workaround. Nothing talked to anything else.</p>
+
+  <div class="callout red">
+    <div class="callout-label">The Breaking Point</div>
+    <p>We had a resident who had moved out three weeks earlier still being billed. We had a property manager who had no idea a maintenance request from 12 days ago was still open. We had a finance team that could not tell you within 24 hours what the total occupancy-adjusted revenue was across the portfolio. We were scaling the business, but we were scaling the chaos along with it.</p>
+  </div>
+
+  <p class="body">The mandate was clear: build the operating system for Colive. Not a feature. Not a module. A full enterprise resource planning platform that could become the single source of truth for every business function.</p>
+
+  <h2 class="s">Buy vs. Build: The Decision That Defined Everything</h2>
+
+  <p class="body">We evaluated five enterprise solutions. The answer was consistent: <strong>co-living sits at the intersection of hospitality, real estate, fintech, and consumer tech</strong> &mdash; no off-the-shelf ERP understood that combination. Property management systems understood leases but not bed-level occupancy. Billing systems understood invoices but not the bundled pricing logic of co-living. Every vendor demo ended with &ldquo;we can customise that.&rdquo; The customisation cost exceeded building our own.</p>
+
+  <blockquote>
+    <p>&ldquo;Every vendor demo ended the same way: &lsquo;We can customise that for you.&rsquo; After the fifth vendor, I calculated that the total customisation cost would exceed building our own system &mdash; and we would still end up with something that did not fit our business model.&rdquo;</p>
+  </blockquote>
+
+  <p class="body">We made the call to build. It was not the easy decision. It was the right one.</p>
+
+  <h2 class="s">Designing for a Business, Not a Feature List</h2>
+
+  <p class="body">We started with <strong>business workflows</strong>, not a feature list &mdash; mapping every process from lead enquiry to move-out deposit refund. After interviewing 40+ team members across six functions, a clear picture emerged of where the business was bleeding time, money, and trust. We grouped the ERP into six pillars:</p>
+
+  <h3 class="ss">The 32 modules we built</h3>
+
+  <div class="module-grid">
+    <div class="module-chip"><div class="mc-cat">Property</div>Portfolio Manager</div>
+    <div class="module-chip"><div class="mc-cat">Property</div>Room &amp; Bed Config</div>
+    <div class="module-chip"><div class="mc-cat">Property</div>Occupancy Dashboard</div>
+    <div class="module-chip"><div class="mc-cat">Property</div>Asset Registry</div>
+    <div class="module-chip"><div class="mc-cat">Resident</div>Move-in Workflow</div>
+    <div class="module-chip"><div class="mc-cat">Resident</div>Move-out Workflow</div>
+    <div class="module-chip"><div class="mc-cat">Resident</div>Contract Management</div>
+    <div class="module-chip"><div class="mc-cat">Resident</div>Resident App Portal</div>
+    <div class="module-chip"><div class="mc-cat">Finance</div>Billing Engine</div>
+    <div class="module-chip"><div class="mc-cat">Finance</div>Collections &amp; Dues</div>
+    <div class="module-chip"><div class="mc-cat">Finance</div>Deposit Management</div>
+    <div class="module-chip"><div class="mc-cat">Finance</div>Revenue Reporting</div>
+    <div class="module-chip"><div class="mc-cat">Finance</div>Vendor Payments</div>
+    <div class="module-chip"><div class="mc-cat">Finance</div>P&amp;L per Property</div>
+    <div class="module-chip"><div class="mc-cat">Ops</div>Maintenance Ticketing</div>
+    <div class="module-chip"><div class="mc-cat">Ops</div>Vendor Management</div>
+    <div class="module-chip"><div class="mc-cat">Ops</div>Housekeeping Scheduler</div>
+    <div class="module-chip"><div class="mc-cat">Ops</div>Inventory &amp; Procurement</div>
+    <div class="module-chip"><div class="mc-cat">Ops</div>SLA Tracking</div>
+    <div class="module-chip"><div class="mc-cat">Sales</div>Lead Management</div>
+    <div class="module-chip"><div class="mc-cat">Sales</div>Tour Scheduling</div>
+    <div class="module-chip"><div class="mc-cat">Sales</div>Booking &amp; Allotment</div>
+    <div class="module-chip"><div class="mc-cat">Sales</div>Waitlist Manager</div>
+    <div class="module-chip"><div class="mc-cat">Sales</div>Commission Engine</div>
+    <div class="module-chip"><div class="mc-cat">Analytics</div>Occupancy Analytics</div>
+    <div class="module-chip"><div class="mc-cat">Analytics</div>Revenue Analytics</div>
+    <div class="module-chip"><div class="mc-cat">Analytics</div>Churn Prediction</div>
+    <div class="module-chip"><div class="mc-cat">Analytics</div>NPS &amp; Feedback</div>
+    <div class="module-chip"><div class="mc-cat">Admin</div>Role &amp; Access Control</div>
+    <div class="module-chip"><div class="mc-cat">Admin</div>Notifications Engine</div>
+    <div class="module-chip"><div class="mc-cat">Admin</div>Audit Logs</div>
+    <div class="module-chip"><div class="mc-cat">Admin</div>Integration Hub</div>
+  </div>
+
+  <h2 class="s">How We Shipped 32 Modules in 12 Months</h2>
+
+  <p class="body">The team was 6 engineers, 1 designer, and me. No dedicated QA or DevOps at the start. Five principles made it possible:</p>
+
+  <ol class="num-list">
+    <li><div class="n">01</div><div><strong>Ruthless sequencing by dependency, not by priority.</strong> We mapped the entire module dependency graph before writing a line of code. Billing depended on Contracts. Contracts depended on Move-in. Move-in depended on Room Config. We built from the foundation up, so each module could stand on a stable base. Teams that demanded their module first had to wait if the plumbing was not ready.</div></li>
+    <li><div class="n">02</div><div><strong>One shared data model from day one.</strong> The most common mistake in platform builds is letting teams design their own schemas. We spent the first four weeks exclusively on the data model &mdash; a single, canonical representation of a property, a bed, a resident, a contract, a payment, and a ticket. Every module was built on this shared foundation. This is what made cross-module reporting possible from launch.</div></li>
+    <li><div class="n">03</div><div><strong>Shadow mode before hard cutover.</strong> For the most critical modules &mdash; billing and collections &mdash; we ran the new ERP in parallel with the existing spreadsheet process for six weeks. Discrepancies were flagged and resolved. Finance teams built confidence. When we cut over, there were no surprises.</div></li>
+    <li><div class="n">04</div><div><strong>Embedded PMs in operations, not in meetings.</strong> I had one junior PM who spent 3 days a week sitting with operations teams, watching how they used each module in real time. The feedback loop was immediate. If a workflow was wrong, we knew within days, not months. This single practice saved us from at least four major rework cycles.</div></li>
+    <li><div class="n">05</div><div><strong>Progressive rollout by property cluster.</strong> We did not flip the switch company-wide. We piloted with 3 properties, then 10, then 30, then the full portfolio. Each cluster surfaced edge cases &mdash; property-specific billing rules, regional maintenance workflows, city-specific compliance requirements &mdash; that we handled before the next rollout wave.</div></li>
+  </ol>
+
+  <h2 class="s">The Hard Part: Adoption</h2>
+
+  <div class="callout amber">
+    <div class="callout-label">The Real Challenge</div>
+    <p>Building was not the hard part. Getting 400+ staff across 6 cities to stop using Excel and WhatsApp was. Technology change is always a people problem dressed as a software problem.</p>
+  </div>
+
+  <p class="body"><strong>Adoption required deliberate design, not just correct features.</strong> Three mechanisms made the difference:</p>
+
+  <ol class="num-list">
+    <li><div class="n">01</div><div><strong>Compliance visibility for managers.</strong> Every manager could see, in real time, which of their team members had completed workflows in the ERP vs. done them off-system. This created natural accountability without requiring enforcement from above.</div></li>
+    <li><div class="n">02</div><div><strong>Pain-first onboarding.</strong> We introduced each team to the ERP by showing them the single most painful thing it solved for them personally. Maintenance staff saw that tickets could no longer be lost or forgotten. Finance saw that billing errors would drop to near zero. We sold the system on personal pain points, not company-level benefits.</div></li>
+    <li><div class="n">03</div><div><strong>Zero-tolerance data entry policy with audit trails.</strong> We made it policy that any transaction not in the ERP did not happen. If maintenance was done but not logged, the vendor did not get paid. Harsh, but it worked. Within 8 weeks, ERP usage went from 40% to 94% across the portfolio.</div></li>
+  </ol>
+
+  <h2 class="s">What It Did to the Business</h2>
+
+  <p class="body">By month 18, the numbers were unambiguous:</p>
+
+  <table class="impact-table">
+    <thead>
+      <tr><th>Area</th><th>Before ERP</th><th>After ERP</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><strong>Revenue reporting</strong></td><td>3&ndash;5 day lag, manual consolidation</td><td>Real-time dashboard, zero manual work</td></tr>
+      <tr><td><strong>Billing accuracy</strong></td><td>~12% error rate on monthly invoices</td><td>Under 1% error rate</td></tr>
+      <tr><td><strong>Maintenance resolution time</strong></td><td>Average 6.2 days to close a ticket</td><td>Average 1.8 days to close</td></tr>
+      <tr><td><strong>Collections efficiency</strong></td><td>18% of dues outstanding beyond 30 days</td><td>Under 5% outstanding beyond 30 days</td></tr>
+      <tr><td><strong>Move-in process time</strong></td><td>3&ndash;4 hours per resident</td><td>Under 45 minutes end to end</td></tr>
+      <tr><td><strong>Resident NPS</strong></td><td>Baseline 34</td><td>Grew to 61 within 12 months of ERP launch</td></tr>
+      <tr><td><strong>Retention rate</strong></td><td>Baseline</td><td>86% increase in lease renewals</td></tr>
+      <tr><td><strong>Revenue growth</strong></td><td>Baseline</td><td>550% over 18 months post-launch</td></tr>
+    </tbody>
+  </table>
+
+  <p class="body">The 550% revenue growth was not caused solely by the ERP &mdash; portfolio expansion was happening too. But <strong>without a scalable operational backbone, the business could not have absorbed that growth without breaking.</strong> The ERP was the multiplier.</p>
+
+  <h2 class="s">What I Would Do Differently</h2>
+
+  <div class="learnings">
+    <div class="learning">
+      <div class="learning-num">01</div>
+      <div class="learning-text"><strong>Invest more in the API layer earlier.</strong> We built the core system quickly, but the integration architecture was bolted on later. When we needed to connect to payment gateways, accounting software, and third-party data sources, we paid a significant refactoring cost. The API layer should be a first-class citizen from week one.</div>
+    </div>
+    <div class="learning">
+      <div class="learning-num">02</div>
+      <div class="learning-text"><strong>Build observability in, not after.</strong> In the early months, when something went wrong, we found out from users, not from monitoring. We had no structured logging, no alerting, no dashboards for system health. This was a painful gap. Any ERP handles money and operations &mdash; it needs to be observable from day one.</div>
+    </div>
+    <div class="learning">
+      <div class="learning-num">03</div>
+      <div class="learning-text"><strong>Involve city operations heads as co-designers, not just testers.</strong> We got feedback from frontline staff, which was invaluable. But city operations heads had strategic context &mdash; they knew which workflows would change in 6 months, which vendor relationships were about to shift, which compliance requirements were coming. Involving them earlier would have saved us two significant module redesigns.</div>
+    </div>
+    <div class="learning">
+      <div class="learning-num">04</div>
+      <div class="learning-text"><strong>The data model is the most important product decision you will make.</strong> We got this mostly right, but a few early schema decisions became load-bearing mistakes that took significant effort to unwind. Time spent on the data model is the highest-leverage investment in any platform build. Do not rush it.</div>
+    </div>
+    <div class="learning">
+      <div class="learning-num">05</div>
+      <div class="learning-text"><strong>Adoption is a product metric, not an ops metric.</strong> We tracked usage, but we should have tracked it harder and earlier. Tying product success to adoption rates &mdash; not just feature completeness &mdash; would have surfaced usability issues faster and prevented the &ldquo;we built it, they are not using it&rdquo; problem from festering for three months before we addressed it systematically.</div>
+    </div>
+  </div>
+
+  <h2 class="s">The Outcomes</h2>
+
+  <div class="callout green">
+    <div class="callout-label">Results After 18 Months</div>
+    <p>The ERP became Colive's operational backbone and a competitive differentiator. Investors, expansion partners, and potential acquirers consistently cited the operational infrastructure as a key reason for their confidence in the business.</p>
+  </div>
+
+  <div class="outcome-row">
+    <div class="outcome-pill">&#10003;&nbsp; 32 modules live across the full portfolio</div>
+    <div class="outcome-pill">&#10003;&nbsp; 550% revenue growth enabled</div>
+    <div class="outcome-pill">&#10003;&nbsp; 86% retention rate increase</div>
+    <div class="outcome-pill">&#10003;&nbsp; Billing error rate reduced to under 1%</div>
+    <div class="outcome-pill">&#10003;&nbsp; Maintenance resolution time reduced from 6.2 to 1.8 days</div>
+    <div class="outcome-pill">&#10003;&nbsp; Collections outstanding beyond 30 days reduced from 18% to 5%</div>
+    <div class="outcome-pill">&#10003;&nbsp; Move-in time reduced from 4 hours to 45 minutes</div>
+    <div class="outcome-pill">&#10003;&nbsp; Resident NPS grew from 34 to 61</div>
+    <div class="outcome-pill">&#10003;&nbsp; ERP adoption reached 94% across 400+ staff in 8 weeks</div>
+  </div>
+
+  <h2 class="s">The Bigger Lesson</h2>
+
+  <p class="body">This is a story about <strong>sequencing, data model integrity, and building for the business &mdash; not for the engineers</strong>. We started with the question: <em>what does this business need to be operationally excellent?</em> Everything else followed. Internal products are not less important than consumer products. They are the infrastructure on which consumer experiences are built. Get the foundation right, and everything above it becomes possible.</p>
+
+  <div style="margin-top:56px;padding-top:32px;border-top:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:20px;">
+    <div>
+      <div style="font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:16px;color:var(--ink);margin-bottom:4px;">Archisman Sarkar</div>
+      <div style="font-size:12px;color:var(--faint);">Head of Product &middot; Colive (Sattva Group) &middot; Bangalore, India</div>
+      <div style="font-size:12px;color:var(--faint);margin-top:2px;">me@reacharchisman.com</div>
+    </div>
+    <a href="index.html#insights" style="display:inline-flex;align-items:center;gap:8px;padding:12px 24px;background:var(--indigo);color:#fff;text-decoration:none;border-radius:8px;font-size:13px;font-weight:500;font-family:'Inter',sans-serif;">&#8592; Back to Insights</a>
+  </div>
+
+</div>
+
+<footer>
+  <div class="ft">&#169; 2025 Archisman Sarkar &middot; <span>reacharchisman.com</span></div>
+  <div class="footer-nav">
+    <a href="index.html">Home</a>
+    <a href="index.html#about">About</a>
+    <a href="index.html#ai-projects">AI Projects</a>
+    <a href="index.html#insights">Insights</a>
+    <a href="index.html#contact">Contact</a>
+  </div>
+</footer>
+
+</body>
+</html>
