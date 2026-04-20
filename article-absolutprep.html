@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>The Campus Startup: Co-founding, Building, and Exiting AbsolutPrep — Archisman Sarkar</title>
+<meta name="description" content="What does it take to go from MBA campus idea to exit in 24 months? The product decisions, uncomfortable trade-offs, and what a successful exit really feels like from the inside."/>
+<meta property="og:title" content="The Campus Startup: Co-founding, Building, and Exiting AbsolutPrep — Archisman Sarkar"/>
+<meta property="og:description" content="Idea to exit in 12 months. The real story of building and exiting AbsolutPrep."/>
+<meta property="og:url" content="https://reacharchisman.com/article-absolutprep.html"/>
+<meta property="og:type" content="article"/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500&family=Playfair+Display:ital,wght@0,700;1,700&display=swap" rel="stylesheet"/>
+<style>
+:root{--bg:#faf8f0;--surface:#ffffff;--ink:#0d1b3e;--ink2:#1e293b;--muted:#64748b;--faint:#94a3b8;--indigo:#1a56db;--amber:#e8c84a;--border:#ddd8c4;--border2:#c8c0a0;--sh:rgba(13,27,62,0.07);}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{background:var(--bg);color:var(--ink);font-family:'Inter',sans-serif;overflow-x:hidden;}
+nav{position:sticky;top:0;z-index:100;padding:0 52px;height:64px;display:flex;align-items:center;justify-content:space-between;background:rgba(250,248,240,0.92);backdrop-filter:blur(24px);border-bottom:1px solid var(--border);box-shadow:0 1px 12px rgba(13,27,62,0.05);}
+.nav-logo{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:18px;text-decoration:none;color:var(--ink);}
+.nav-logo span{color:var(--indigo);}
+.nav-back{display:flex;align-items:center;gap:8px;font-size:11px;letter-spacing:1px;text-transform:uppercase;color:var(--muted);text-decoration:none;font-weight:500;transition:color .2s;}
+.nav-back:hover{color:var(--indigo);}
+.art-hero{max-width:800px;margin:0 auto;padding:80px 52px 56px;}
+.art-tags{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:24px;}
+.art-tag{padding:4px 12px;background:rgba(26,86,219,0.07);border:1px solid rgba(26,86,219,0.15);border-radius:100px;font-size:10px;letter-spacing:1px;text-transform:uppercase;color:var(--indigo);font-weight:600;}
+.art-title{font-family:'Space Grotesk',sans-serif;font-size:clamp(32px,5vw,52px);font-weight:700;line-height:1.1;letter-spacing:-1.5px;color:var(--ink);margin-bottom:24px;}
+.art-subtitle{font-size:18px;line-height:1.7;color:var(--muted);font-weight:400;margin-bottom:40px;font-family:'Playfair Display',serif;font-style:italic;}
+.art-meta-bar{display:flex;align-items:center;gap:20px;padding:20px 0;border-top:1px solid var(--border);border-bottom:1px solid var(--border);}
+.art-author{display:flex;align-items:center;gap:12px;}
+.art-avatar{width:40px;height:40px;border-radius:50%;background:var(--indigo);display:flex;align-items:center;justify-content:center;font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:14px;color:#fff;flex-shrink:0;}
+.art-author-name{font-size:13px;font-weight:600;color:var(--ink);}
+.art-author-role{font-size:11px;color:var(--faint);}
+.art-meta-right{margin-left:auto;display:flex;gap:20px;}
+.art-meta-item{font-size:11px;color:var(--faint);letter-spacing:.3px;}
+.art-meta-item span{color:var(--muted);font-weight:500;}
+.art-body{max-width:800px;margin:0 auto;padding:56px 52px 80px;}
+.callout{background:rgba(26,86,219,0.05);border-left:4px solid var(--indigo);border-radius:0 12px 12px 0;padding:20px 24px;margin:36px 0;}
+.callout.amber{background:rgba(232,200,74,0.08);border-left-color:var(--amber);}
+.callout.red{background:rgba(220,38,38,0.05);border-left-color:#dc2626;}
+.callout.green{background:rgba(16,185,129,0.06);border-left-color:#10b981;}
+.callout-label{font-size:9px;letter-spacing:2.5px;text-transform:uppercase;font-weight:700;color:var(--indigo);margin-bottom:8px;}
+.callout.amber .callout-label{color:#b45309;}
+.callout.red .callout-label{color:#dc2626;}
+.callout.green .callout-label{color:#10b981;}
+.callout p{font-size:14px;line-height:1.75;color:var(--ink2);}
+.stats-row{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin:36px 0;}
+.stat-box{padding:20px;background:var(--surface);border:1px solid var(--border);border-radius:12px;box-shadow:0 4px 16px var(--sh);text-align:center;}
+.stat-box-n{font-family:'Space Grotesk',sans-serif;font-size:28px;font-weight:700;color:var(--indigo);line-height:1;margin-bottom:6px;}
+.stat-box-l{font-size:10px;letter-spacing:.5px;color:var(--faint);font-weight:500;}
+h2.s{font-family:'Space Grotesk',sans-serif;font-size:24px;font-weight:700;letter-spacing:-.5px;color:var(--ink);margin:52px 0 16px;padding-top:52px;border-top:1px solid var(--border);}
+h2.s:first-of-type{border-top:none;padding-top:0;margin-top:0;}
+h3.ss{font-family:'Space Grotesk',sans-serif;font-size:17px;font-weight:700;color:var(--ink);margin:28px 0 10px;}
+p.body{font-size:15px;line-height:1.9;color:var(--muted);margin-bottom:18px;}
+p.body strong{color:var(--ink);font-weight:600;}
+.num-list{list-style:none;display:flex;flex-direction:column;gap:16px;margin:20px 0 24px;}
+.num-list li{display:flex;gap:16px;font-size:14px;line-height:1.8;color:var(--muted);}
+.num-list li .n{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:13px;color:var(--indigo);flex-shrink:0;width:24px;margin-top:2px;}
+.num-list li strong{color:var(--ink);}
+/* Timeline */
+.timeline{display:flex;flex-direction:column;gap:0;margin:28px 0;position:relative;}
+.timeline::before{content:'';position:absolute;left:20px;top:0;bottom:0;width:2px;background:linear-gradient(180deg,var(--indigo),rgba(26,86,219,0.2));}
+.tl-item{display:flex;gap:24px;padding-bottom:28px;position:relative;}
+.tl-dot{width:12px;height:12px;border-radius:50%;background:var(--surface);border:2.5px solid var(--indigo);flex-shrink:0;margin-top:4px;position:relative;z-index:1;box-shadow:0 0 0 4px rgba(26,86,219,0.1);}
+.tl-month{font-family:'Space Grotesk',sans-serif;font-size:11px;font-weight:700;color:var(--indigo);margin-bottom:4px;letter-spacing:.5px;}
+.tl-event{font-size:14px;font-weight:600;color:var(--ink);margin-bottom:4px;}
+.tl-detail{font-size:12px;line-height:1.7;color:var(--muted);}
+blockquote{margin:40px 0;padding:28px 32px;background:var(--surface);border-radius:12px;border:1px solid var(--border);box-shadow:0 4px 20px var(--sh);position:relative;}
+blockquote::before{content:'\201C';font-family:'Playfair Display',serif;font-size:64px;color:var(--indigo);opacity:.3;position:absolute;top:-12px;left:20px;line-height:1;}
+blockquote p{font-family:'Playfair Display',serif;font-style:italic;font-size:18px;line-height:1.7;color:var(--ink);}
+.outcome-row{display:flex;flex-wrap:wrap;gap:10px;margin:20px 0;}
+.outcome-pill{display:flex;align-items:center;gap:8px;padding:8px 16px;background:rgba(16,185,129,0.07);border:1px solid rgba(16,185,129,0.2);border-radius:100px;font-size:12px;font-weight:500;color:#059669;}
+.learnings{display:flex;flex-direction:column;gap:14px;margin:20px 0;}
+.learning{display:flex;gap:16px;padding:16px 20px;background:var(--surface);border:1px solid var(--border);border-radius:10px;transition:all .2s;}
+.learning:hover{border-color:rgba(26,86,219,0.2);background:rgba(26,86,219,0.03);}
+.learning-num{font-family:'Space Grotesk',sans-serif;font-size:18px;font-weight:700;color:var(--indigo);flex-shrink:0;line-height:1.2;}
+.learning-text{font-size:13px;line-height:1.75;color:var(--muted);}
+.learning-text strong{color:var(--ink);}
+footer{border-top:1px solid var(--border);padding:32px 52px;display:flex;align-items:center;justify-content:space-between;background:var(--bg);}
+.ft{font-size:10px;color:var(--faint);font-weight:500;}
+.ft span{color:var(--indigo);}
+.footer-nav{display:flex;gap:20px;}
+.footer-nav a{font-size:11px;color:var(--muted);text-decoration:none;letter-spacing:.5px;}
+.footer-nav a:hover{color:var(--indigo);}
+@media(max-width:760px){
+  nav{padding:0 20px;} .art-hero,.art-body{padding:48px 20px;}
+  .stats-row{grid-template-columns:repeat(2,1fr);}
+  footer{padding:24px 20px;flex-direction:column;gap:16px;text-align:center;}
+  .footer-nav{flex-wrap:wrap;justify-content:center;}
+  .art-meta-bar{flex-wrap:wrap;gap:12px;}
+  .art-meta-right{margin-left:0;}
+  .timeline::before{left:16px;}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">Archi<span>.</span></a>
+  <a href="index.html#insights" class="nav-back">&#8592; Back to Insights</a>
+</nav>
+
+<div class="art-hero">
+  <div class="art-tags">
+    <span class="art-tag">Founding</span>
+    <span class="art-tag">0 to 1</span>
+    <span class="art-tag">Edtech</span>
+    <span class="art-tag">Exit</span>
+  </div>
+  <h1 class="art-title">The Campus Startup: Co-founding, Building, and Exiting AbsolutPrep in 24 Months</h1>
+  <p class="art-subtitle">We started AbsolutPrep on an MBA campus with no funding and a whiteboard idea. Twenty-four months later, we had 650+ suppliers onboarded, early revenue, and a successful exit. Here is the real story.</p>
+  <div class="art-meta-bar">
+    <div class="art-author">
+      <div class="art-avatar">AS</div>
+      <div>
+        <div class="art-author-name">Archisman Sarkar</div>
+        <div class="art-author-role">Co-founder, AbsolutPrep &middot; MBA Campus &rarr; Delhi</div>
+      </div>
+    </div>
+    <div class="art-meta-right">
+      <div class="art-meta-item"><span>6 min read</span></div>
+      <div class="art-meta-item"><span>2016&ndash;17</span> &middot; AbsolutPrep</div>
+    </div>
+  </div>
+</div>
+
+<div class="art-body">
+
+  <div class="stats-row">
+    <div class="stat-box"><div class="stat-box-n">24mo</div><div class="stat-box-l">MBA campus idea to successful exit</div></div>
+    <div class="stat-box"><div class="stat-box-n">650+</div><div class="stat-box-l">Suppliers onboarded on the platform</div></div>
+    <div class="stat-box"><div class="stat-box-n">&#8377;</div><div class="stat-box-l">$1.1M raised in angel funding</div></div>
+    <div class="stat-box"><div class="stat-box-n">1st</div><div class="stat-box-l">Revenue-generating product before graduation</div></div>
+  </div>
+
+  <h2 class="s">Why We Started</h2>
+
+  <p class="body">AbsolutPrep started on the MBA campus at Great Lakes Institute of Management &mdash; not in a garage, not after a corporate career, but between classes and case study submissions. My co-founder and I were watching a problem we had lived through as students: the test-prep market was enormous but broken. <strong>Thick textbooks, photocopied notes, coaching centres that had not updated their methods in a decade, and no personalisation whatsoever.</strong></p>
+
+  <p class="body">The gap we saw was specific: adaptive assessments combined with supplier-side content diversity. India&apos;s test-prep ecosystem had thousands of independent tutors, coaching centres, and subject experts creating excellent content &mdash; but no platform connecting them to students at scale. We decided to build both: an adaptive learning engine for students, and a marketplace that onboarded educators and content suppliers onto a single platform.</p>
+
+  <div class="callout amber">
+    <div class="callout-label">The Founding Premise</div>
+    <p>Two sides, one insight: students needed targeted practice adapted to their weaknesses. Suppliers &mdash; tutors, coaching centres, content creators &mdash; needed a platform to reach students at scale without building their own tech. Connect both, and you create a flywheel where more suppliers attract more students, and more students attract more suppliers.</p>
+  </div>
+
+  <h2 class="s">The 12-Month Journey</h2>
+
+  <div class="timeline">
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div>
+        <div class="tl-month">Month 1&ndash;3 &mdash; On Campus</div>
+        <div class="tl-event">Idea, validation, and first supplier conversations</div>
+        <div class="tl-detail">The idea was born during MBA. Between classes, we spoke to 60+ students and 40+ independent tutors, coaching centre owners, and content creators. The supply-side insight was clear: hundreds of excellent educators had no scalable way to reach students. We decided to build the marketplace and the adaptive learning engine simultaneously.</div>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div>
+        <div class="tl-month">Month 4&ndash;6</div>
+        <div class="tl-event">MVP launched, first suppliers onboarded</div>
+        <div class="tl-detail">We shipped a deliberately simple MVP &mdash; a diagnostic assessment, a basic adaptive practice engine, and a supplier onboarding flow. We onboarded the first 50 suppliers before opening to students. Content depth was our moat; we needed supply before demand. 20 beta students used it for free and gave us the feedback we needed to iterate.</div>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div>
+        <div class="tl-month">Month 7&ndash;9</div>
+        <div class="tl-event">Fundraising and the first external capital</div>
+        <div class="tl-detail">We raised <strong>$1.1M in angel funding</strong> &mdash; largely through the MBA network and early believer investors who saw the supplier-side traction. The raise gave us 12 months of focused runway to invest in content quality, supplier tooling, and student acquisition without the immediate pressure of profitability.</div>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div>
+        <div class="tl-month">Month 10&ndash;14</div>
+        <div class="tl-event">650+ suppliers onboarded, early revenue</div>
+        <div class="tl-detail">Supplier growth was faster than we expected. Word spread through educator networks. By month 14, we had 650+ suppliers &mdash; individual tutors, coaching centres, and content creators &mdash; on the platform. Student-side revenue started in month 11 with a per-exam-cycle pricing model. The per-cycle model outperformed our initial monthly subscription 2:1 on conversion.</div>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div>
+        <div class="tl-month">Month 15&ndash;20</div>
+        <div class="tl-event">Growth, coaching centre channel, and inbound interest</div>
+        <div class="tl-detail">Our coaching centre white-label offer &mdash; a platform branded as their own at a per-student fee &mdash; drove significant CAC reduction. Three coaching centres in the first month, each bringing 80&ndash;120 students. A larger edtech player began watching our traction closely. The 650+ supplier network and the coaching centre distribution were the assets that caught their attention &mdash; not our technology.</div>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div>
+        <div class="tl-month">Month 21&ndash;24</div>
+        <div class="tl-event">Acquisition conversation, due diligence, and exit</div>
+        <div class="tl-detail">The acquisition process was more intensive than we expected. Three rounds of financial review, product audit, supplier reference calls, and team retention discussions. We closed the exit in month 24. The outcome was meaningful for both co-founders. What the acquirer valued most was the supplier network and the coaching centre distribution &mdash; both built from zero on an MBA campus.</div>
+      </div>
+    </div>
+  </div>
+
+  <h2 class="s">What We Got Wrong</h2>
+
+  <p class="body">Every founder story has a sanitised version and a real version. Here is the real version of what we got badly wrong.</p>
+
+  <ol class="num-list">
+    <li><div class="n">01</div><div><strong>We under-invested in content quality early.</strong> The adaptive engine was sound but the question bank was thin in the early months. Students who exhausted the available questions on a topic quickly lost trust in the platform, even if the adaptive logic was working perfectly. <strong>Content depth is product quality in an assessment platform</strong>, and we treated it as a backlog item rather than a launch requirement.</div></li>
+    <li><div class="n">02</div><div><strong>We built for the wrong device first.</strong> Our MVP was web-first. 80% of our target users were on Android mobile with patchy connectivity. We lost three months of potential growth before we prioritised the mobile app and offline mode. In India&apos;s test-prep market in 2016, mobile-first was not a preference &mdash; it was the only viable form factor.</div></li>
+    <li><div class="n">03</div><div><strong>We almost missed the coaching centre channel by over-thinking it.</strong> The white-label idea came from a casual conversation with a coaching centre owner who complained that his students were using competitors&apos; platforms. We almost did not pursue it because it felt like a distraction from the direct-to-student model. The best distribution insight we had nearly died in a meeting because it did not fit our original thesis.</div></li>
+    <li><div class="n">04</div><div><strong>We had no post-acquisition plan.</strong> When the acquisition conversation started, we had not thought about what we wanted from the process beyond the financial outcome. What role did we want post-acquisition? What were our non-negotiables for the product we had built? What happened to our coaching centre partners? Having no framework for these questions meant we were reactive in a process that rewarded preparation.</div></li>
+  </ol>
+
+  <blockquote>
+    <p>&ldquo;The asset the acquirer wanted was not what we thought we were building. We thought we were building a product. We were actually building a distribution channel &mdash; and the product was the proof that the channel worked.&rdquo;</p>
+  </blockquote>
+
+  <h2 class="s">What a Successful Exit Actually Feels Like</h2>
+
+  <p class="body">There is a version of startup exit stories that is almost entirely triumphant. The reality is more complex and more interesting.</p>
+
+  <p class="body"><strong>The elation is real but brief.</strong> The moment the deal closed, there were about 36 hours of genuine exhilaration. Then it was replaced almost immediately by a strange flatness. The problem that had consumed every waking hour for 12 months was now someone else&apos;s problem. That transition is more disorienting than most exit narratives admit.</p>
+
+  <p class="body"><strong>The validation is complicated.</strong> A successful exit feels like proof that your judgment was right. But you also know, with uncomfortable clarity, exactly how many times you got lucky &mdash; the coaching centre conversation that almost did not happen, the acquirer who reached out two months before our cash reserves would have forced a different kind of conversation. Success and survivorship bias are hard to fully separate.</p>
+
+  <p class="body"><strong>The most lasting feeling is the education.</strong> Twelve months of building a company from zero is the most compressed, high-feedback learning environment I have ever been in. Every decision had direct, measurable consequences. There was nowhere to hide from bad judgment and no way to avoid taking credit for good judgment. That clarity of feedback loop &mdash; the knowledge that your decisions have direct consequence &mdash; is something I have tried to recreate in every product role since.</p>
+
+  <h2 class="s">What I Took Into Every Role After</h2>
+
+  <div class="learnings">
+    <div class="learning">
+      <div class="learning-num">01</div>
+      <div class="learning-text"><strong>Distribution is a product decision, not a sales decision.</strong> The coaching centre white-label was a product decision that created a distribution channel. Every product has distribution built into it &mdash; or does not. The ones that do not usually fail not because the product is wrong but because nobody finds it. Build your distribution channel into your product architecture from the beginning.</div>
+    </div>
+    <div class="learning">
+      <div class="learning-num">02</div>
+      <div class="learning-text"><strong>Pricing is product design.</strong> The switch from monthly subscription to per-cycle pricing doubled conversion without changing a single feature. How you package and price your product shapes how users perceive its value. Pricing is not a number you pick after you build the product &mdash; it is a core design decision that deserves the same rigour as your information architecture.</div>
+    </div>
+    <div class="learning">
+      <div class="learning-num">03</div>
+      <div class="learning-text"><strong>Speed of learning beats speed of building.</strong> We shipped a deliberately ugly MVP because we needed to learn faster than we needed to impress. The 20 students on the beta taught us more in four weeks than we could have inferred from six months of market research. Get something real in front of real users as fast as possible and let their behaviour teach you what to build next.</div>
+    </div>
+    <div class="learning">
+      <div class="learning-num">04</div>
+      <div class="learning-text"><strong>The asset you are building is often not what you think it is.</strong> We thought we were building an adaptive assessment engine. The acquirer wanted our coaching centre relationships. Regularly asking &ldquo;what is the actual valuable thing we are creating here?&rdquo; &mdash; and being honest about the answer &mdash; is one of the most important strategic habits a founder or product leader can develop.</div>
+    </div>
+    <div class="learning">
+      <div class="learning-num">05</div>
+      <div class="learning-text"><strong>Founding something changes how you think about product forever.</strong> When you have been responsible for the entire outcome &mdash; product, growth, revenue, team, survival &mdash; you develop a systems-level view that is very hard to develop any other way. Every product decision I have made since AbsolutPrep has been informed by understanding what it feels like when the consequences of those decisions are entirely your own.</div>
+    </div>
+  </div>
+
+  <h2 class="s">The Outcomes</h2>
+
+  <div class="outcome-row">
+    <div class="outcome-pill">&#10003;&nbsp; MBA campus idea to exit in 24 months</div>
+    <div class="outcome-pill">&#10003;&nbsp; $1.1M raised in angel funding</div>
+    <div class="outcome-pill">&#10003;&nbsp; 650+ suppliers onboarded on the platform</div>
+    <div class="outcome-pill">&#10003;&nbsp; Per-cycle pricing model doubled conversion</div>
+    <div class="outcome-pill">&#10003;&nbsp; Successful acquisition by larger edtech player</div>
+    <div class="outcome-pill">&#10003;&nbsp; Both co-founders retained meaningful outcome</div>
+  </div>
+
+  <h2 class="s">The Bigger Lesson</h2>
+
+  <p class="body">AbsolutPrep was not a unicorn. It was not a decade-long journey. It was a focused, fast, capital-efficient build that found a specific buyer for a specific reason in a specific window. <strong>That is a legitimate and underrated form of entrepreneurial success.</strong></p>
+
+  <p class="body">Not every company needs to be a platform play. Not every founder needs to raise a Series A. Some of the most valuable product experiences I have had came from building something small and real, shipping it to real users, watching it work, and handing it off to someone who could take it further than we could. The 12-month startup taught me more about product, distribution, and what users actually need than anything I read in a business school classroom.</p>
+
+  <p class="body">And it gave me something that no corporate product role fully replicates: the experience of owning the outcome entirely. That experience is, I believe, the single greatest accelerant for becoming a sharper, more decisive, more commercially grounded product leader.</p>
+
+  <div style="margin-top:56px;padding-top:32px;border-top:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:20px;">
+    <div>
+      <div style="font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:16px;color:var(--ink);margin-bottom:4px;">Archisman Sarkar</div>
+      <div style="font-size:12px;color:var(--faint);">Co-founder, AbsolutPrep &middot; Great Lakes Institute of Management &rarr; Delhi</div>
+      <div style="font-size:12px;color:var(--faint);margin-top:2px;">me@reacharchisman.com</div>
+    </div>
+    <a href="index.html#insights" style="display:inline-flex;align-items:center;gap:8px;padding:12px 24px;background:var(--indigo);color:#fff;text-decoration:none;border-radius:8px;font-size:13px;font-weight:500;font-family:'Inter',sans-serif;">&#8592; Back to Insights</a>
+  </div>
+
+</div>
+
+<footer>
+  <div class="ft">&#169; 2025 Archisman Sarkar &middot; <span>reacharchisman.com</span></div>
+  <div class="footer-nav">
+    <a href="index.html">Home</a>
+    <a href="index.html#about">About</a>
+    <a href="index.html#ai-projects">AI Projects</a>
+    <a href="index.html#insights">Insights</a>
+    <a href="index.html#contact">Contact</a>
+  </div>
+</footer>
+
+</body>
+</html>

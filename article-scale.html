@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>From One Market to 90: Scaling a Consumer App to 1M+ Users — Archisman Sarkar</title>
+<meta name="description" content="How we scaled Edvoy's consumer app to 1M+ users across 90+ countries — the localisation lessons, trust signals, retention architecture, and personalisation engine that made it work."/>
+<meta property="og:title" content="From One Market to 90: Scaling a Consumer App to 1M+ Users — Archisman Sarkar"/>
+<meta property="og:description" content="Most growth playbooks are written for single-market products. Here is what actually works when your users are in Lagos, Karachi, Colombo, and Nairobi simultaneously."/>
+<meta property="og:url" content="https://reacharchisman.com/article-scale.html"/>
+<meta property="og:type" content="article"/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500&family=Playfair+Display:ital,wght@0,700;1,700&display=swap" rel="stylesheet"/>
+<style>
+:root{--bg:#faf8f0;--surface:#ffffff;--ink:#0d1b3e;--ink2:#1e293b;--muted:#64748b;--faint:#94a3b8;--indigo:#1a56db;--amber:#e8c84a;--border:#ddd8c4;--border2:#c8c0a0;--sh:rgba(13,27,62,0.07);}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{background:var(--bg);color:var(--ink);font-family:'Inter',sans-serif;overflow-x:hidden;}
+nav{position:sticky;top:0;z-index:100;padding:0 52px;height:64px;display:flex;align-items:center;justify-content:space-between;background:rgba(250,248,240,0.92);backdrop-filter:blur(24px);border-bottom:1px solid var(--border);box-shadow:0 1px 12px rgba(13,27,62,0.05);}
+.nav-logo{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:18px;text-decoration:none;color:var(--ink);}
+.nav-logo span{color:var(--indigo);}
+.nav-back{display:flex;align-items:center;gap:8px;font-size:11px;letter-spacing:1px;text-transform:uppercase;color:var(--muted);text-decoration:none;font-weight:500;transition:color .2s;}
+.nav-back:hover{color:var(--indigo);}
+.art-hero{max-width:800px;margin:0 auto;padding:80px 52px 56px;}
+.art-tags{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:24px;}
+.art-tag{padding:4px 12px;background:rgba(26,86,219,0.07);border:1px solid rgba(26,86,219,0.15);border-radius:100px;font-size:10px;letter-spacing:1px;text-transform:uppercase;color:var(--indigo);font-weight:600;}
+.art-title{font-family:'Space Grotesk',sans-serif;font-size:clamp(32px,5vw,52px);font-weight:700;line-height:1.1;letter-spacing:-1.5px;color:var(--ink);margin-bottom:24px;}
+.art-subtitle{font-size:18px;line-height:1.7;color:var(--muted);font-weight:400;margin-bottom:40px;font-family:'Playfair Display',serif;font-style:italic;}
+.art-meta-bar{display:flex;align-items:center;gap:20px;padding:20px 0;border-top:1px solid var(--border);border-bottom:1px solid var(--border);}
+.art-author{display:flex;align-items:center;gap:12px;}
+.art-avatar{width:40px;height:40px;border-radius:50%;background:var(--indigo);display:flex;align-items:center;justify-content:center;font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:14px;color:#fff;flex-shrink:0;}
+.art-author-name{font-size:13px;font-weight:600;color:var(--ink);}
+.art-author-role{font-size:11px;color:var(--faint);}
+.art-meta-right{margin-left:auto;display:flex;gap:20px;}
+.art-meta-item{font-size:11px;color:var(--faint);letter-spacing:.3px;}
+.art-meta-item span{color:var(--muted);font-weight:500;}
+.art-body{max-width:800px;margin:0 auto;padding:56px 52px 80px;}
+.callout{background:rgba(26,86,219,0.05);border-left:4px solid var(--indigo);border-radius:0 12px 12px 0;padding:20px 24px;margin:36px 0;}
+.callout.amber{background:rgba(232,200,74,0.08);border-left-color:var(--amber);}
+.callout.red{background:rgba(220,38,38,0.05);border-left-color:#dc2626;}
+.callout.green{background:rgba(16,185,129,0.06);border-left-color:#10b981;}
+.callout-label{font-size:9px;letter-spacing:2.5px;text-transform:uppercase;font-weight:700;color:var(--indigo);margin-bottom:8px;}
+.callout.amber .callout-label{color:#b45309;}
+.callout.red .callout-label{color:#dc2626;}
+.callout.green .callout-label{color:#10b981;}
+.callout p{font-size:14px;line-height:1.75;color:var(--ink2);}
+.stats-row{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin:36px 0;}
+.stat-box{padding:20px;background:var(--surface);border:1px solid var(--border);border-radius:12px;box-shadow:0 4px 16px var(--sh);text-align:center;}
+.stat-box-n{font-family:'Space Grotesk',sans-serif;font-size:28px;font-weight:700;color:var(--indigo);line-height:1;margin-bottom:6px;}
+.stat-box-l{font-size:10px;letter-spacing:.5px;color:var(--faint);font-weight:500;}
+h2.s{font-family:'Space Grotesk',sans-serif;font-size:24px;font-weight:700;letter-spacing:-.5px;color:var(--ink);margin:52px 0 16px;padding-top:52px;border-top:1px solid var(--border);}
+h2.s:first-of-type{border-top:none;padding-top:0;margin-top:0;}
+h3.ss{font-family:'Space Grotesk',sans-serif;font-size:17px;font-weight:700;color:var(--ink);margin:28px 0 10px;}
+p.body{font-size:15px;line-height:1.9;color:var(--muted);margin-bottom:18px;}
+p.body strong{color:var(--ink);font-weight:600;}
+.num-list{list-style:none;display:flex;flex-direction:column;gap:16px;margin:20px 0 24px;}
+.num-list li{display:flex;gap:16px;font-size:14px;line-height:1.8;color:var(--muted);}
+.num-list li .n{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:13px;color:var(--indigo);flex-shrink:0;width:24px;margin-top:2px;}
+.num-list li strong{color:var(--ink);}
+.impact-table{width:100%;border-collapse:collapse;margin:24px 0;font-size:13px;}
+.impact-table th{text-align:left;padding:10px 16px;background:var(--ink);color:#fff;font-size:10px;letter-spacing:1.5px;text-transform:uppercase;font-weight:600;}
+.impact-table th:first-child{border-radius:8px 0 0 0;}
+.impact-table th:last-child{border-radius:0 8px 0 0;}
+.impact-table td{padding:12px 16px;border-bottom:1px solid var(--border);color:var(--muted);}
+.impact-table td strong{color:var(--ink);}
+.impact-table tr:hover td{background:rgba(26,86,219,0.03);}
+blockquote{margin:40px 0;padding:28px 32px;background:var(--surface);border-radius:12px;border:1px solid var(--border);box-shadow:0 4px 20px var(--sh);position:relative;}
+blockquote::before{content:'\201C';font-family:'Playfair Display',serif;font-size:64px;color:var(--indigo);opacity:.3;position:absolute;top:-12px;left:20px;line-height:1;}
+blockquote p{font-family:'Playfair Display',serif;font-style:italic;font-size:18px;line-height:1.7;color:var(--ink);}
+.outcome-row{display:flex;flex-wrap:wrap;gap:10px;margin:20px 0;}
+.outcome-pill{display:flex;align-items:center;gap:8px;padding:8px 16px;background:rgba(16,185,129,0.07);border:1px solid rgba(16,185,129,0.2);border-radius:100px;font-size:12px;font-weight:500;color:#059669;}
+.learnings{display:flex;flex-direction:column;gap:14px;margin:20px 0;}
+.learning{display:flex;gap:16px;padding:16px 20px;background:var(--surface);border:1px solid var(--border);border-radius:10px;transition:all .2s;}
+.learning:hover{border-color:rgba(26,86,219,0.2);background:rgba(26,86,219,0.03);}
+.learning-num{font-family:'Space Grotesk',sans-serif;font-size:18px;font-weight:700;color:var(--indigo);flex-shrink:0;line-height:1.2;}
+.learning-text{font-size:13px;line-height:1.75;color:var(--muted);}
+.learning-text strong{color:var(--ink);}
+/* Market cards */
+.market-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:28px 0;}
+.market-card{padding:20px;background:var(--surface);border:1px solid var(--border);border-radius:12px;box-shadow:0 4px 14px var(--sh);}
+.market-flag{font-size:24px;margin-bottom:10px;}
+.market-name{font-family:'Space Grotesk',sans-serif;font-size:13px;font-weight:700;color:var(--ink);margin-bottom:6px;}
+.market-insight{font-size:11px;line-height:1.65;color:var(--muted);}
+.market-signal{font-size:10px;font-weight:600;color:var(--indigo);margin-top:8px;padding-top:8px;border-top:1px solid var(--border);}
+footer{border-top:1px solid var(--border);padding:32px 52px;display:flex;align-items:center;justify-content:space-between;background:var(--bg);}
+.ft{font-size:10px;color:var(--faint);font-weight:500;}
+.ft span{color:var(--indigo);}
+.footer-nav{display:flex;gap:20px;}
+.footer-nav a{font-size:11px;color:var(--muted);text-decoration:none;letter-spacing:.5px;}
+.footer-nav a:hover{color:var(--indigo);}
+@media(max-width:760px){
+  nav{padding:0 20px;} .art-hero,.art-body{padding:48px 20px;}
+  .stats-row{grid-template-columns:repeat(2,1fr);}
+  .market-grid{grid-template-columns:repeat(2,1fr);}
+  footer{padding:24px 20px;flex-direction:column;gap:16px;text-align:center;}
+  .footer-nav{flex-wrap:wrap;justify-content:center;}
+  .art-meta-bar{flex-wrap:wrap;gap:12px;}
+  .art-meta-right{margin-left:0;}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">Archi<span>.</span></a>
+  <a href="index.html#insights" class="nav-back">&#8592; Back to Insights</a>
+</nav>
+
+<div class="art-hero">
+  <div class="art-tags">
+    <span class="art-tag">Consumer Product</span>
+    <span class="art-tag">Growth</span>
+    <span class="art-tag">Localisation</span>
+    <span class="art-tag">Retention</span>
+  </div>
+  <h1 class="art-title">From One Market to 90: How We Scaled a Consumer App to 1M+ Users Without Losing the Product Soul</h1>
+  <p class="art-subtitle">Most growth playbooks are written for single-market products. Ours were not. Here is what actually works when your users are in Lagos, Karachi, Colombo, and Nairobi simultaneously &mdash; with different devices, trust signals, and definitions of what a good education decision looks like.</p>
+  <div class="art-meta-bar">
+    <div class="art-author">
+      <div class="art-avatar">AS</div>
+      <div>
+        <div class="art-author-name">Archisman Sarkar</div>
+        <div class="art-author-role">Director of Product, Edvoy</div>
+      </div>
+    </div>
+    <div class="art-meta-right">
+      <div class="art-meta-item"><span>6 min read</span></div>
+      <div class="art-meta-item"><span>2024</span> &middot; Edvoy</div>
+    </div>
+  </div>
+</div>
+
+<div class="art-body">
+
+  <div class="stats-row">
+    <div class="stat-box"><div class="stat-box-n">1M+</div><div class="stat-box-l">Users on the consumer platform</div></div>
+    <div class="stat-box"><div class="stat-box-n">90+</div><div class="stat-box-l">Source countries</div></div>
+    <div class="stat-box"><div class="stat-box-n">6</div><div class="stat-box-l">Destination markets (UK, AU, CA, IE, US, NZ)</div></div>
+    <div class="stat-box"><div class="stat-box-n">18mo</div><div class="stat-box-l">From regional to global scale</div></div>
+  </div>
+
+  <h2 class="s">The Problem With Most Global Growth Playbooks</h2>
+
+  <p class="body">The standard consumer growth playbook &mdash; paid acquisition, referral loops, push notification re-engagement, app store optimisation &mdash; was written for products where users share a cultural context, a connectivity baseline, and a common decision-making framework. <strong>Edvoy served none of those assumptions.</strong></p>
+
+  <p class="body">A student in Lahore applying to study in the UK had different trust triggers, different content consumption patterns, different device capabilities, and a fundamentally different relationship with the concept of &ldquo;studying abroad&rdquo; than a student in Colombo applying to Australia. Treating them as the same user in the same funnel produced the same result every time: optimised for one market, broken for the other.</p>
+
+  <div class="callout">
+    <div class="callout-label">The Core Insight</div>
+    <p>Global scale is not achieved by building one product and translating it. It is achieved by building one product that is intelligent enough to feel locally designed &mdash; without fragmenting into 90 separate products that nobody can maintain.</p>
+  </div>
+
+  <h2 class="s">What Made Each Market Different</h2>
+
+  <p class="body">Before we could build for global scale, we had to understand what &ldquo;global&rdquo; actually meant in our context. Here is what market-level research and product data revealed across six of our highest-volume source markets:</p>
+
+  <div class="market-grid">
+    <div class="market-card">
+      <div class="market-flag">&#127470;&#127475;</div>
+      <div class="market-name">India</div>
+      <div class="market-insight">Highest app engagement, longest decision cycles (12&ndash;18 months). Family involvement in the decision is high &mdash; content that speaks to parents, not just students, performs significantly better.</div>
+      <div class="market-signal">Key signal: parental trust content</div>
+    </div>
+    <div class="market-card">
+      <div class="market-flag">&#127475;&#127468;</div>
+      <div class="market-name">Nigeria</div>
+      <div class="market-insight">Strong peer referral behaviour. Students trust recommendations from other Nigerian students who have gone before them. Testimonials from same-country peers drive conversion more than any other content type.</div>
+      <div class="market-signal">Key signal: peer social proof</div>
+    </div>
+    <div class="market-card">
+      <div class="market-flag">&#127477;&#127472;</div>
+      <div class="market-name">Pakistan</div>
+      <div class="market-insight">High search-to-app conversion but low session depth on first install. Users needed a strong onboarding hook in the first 90 seconds or they churned. WhatsApp as a re-engagement channel outperformed email 4:1.</div>
+      <div class="market-signal">Key signal: instant value delivery</div>
+    </div>
+    <div class="market-card">
+      <div class="market-flag">&#127463;&#127465;</div>
+      <div class="market-name">Bangladesh</div>
+      <div class="market-insight">Highest sensitivity to data costs and app size. Users on mid-range Android devices with limited storage. Performance optimisation and APK size reduction directly correlated with install-to-activation rates.</div>
+      <div class="market-signal">Key signal: lightweight experience</div>
+    </div>
+    <div class="market-card">
+      <div class="market-flag">&#127472;&#127466;</div>
+      <div class="market-name">Kenya</div>
+      <div class="market-insight">Strong counsellor-mediated adoption &mdash; students arrived via referral from education agents and counsellors rather than organic or paid. Trust was pre-established before app install. Onboarding could skip trust-building steps.</div>
+      <div class="market-signal">Key signal: agent-mediated trust</div>
+    </div>
+    <div class="market-card">
+      <div class="market-flag">&#127473;&#127472;</div>
+      <div class="market-name">Sri Lanka</div>
+      <div class="market-insight">Shorter decision cycles (6&ndash;9 months), higher urgency. Students closer to their application deadline responded to urgency-driven nudges. Content emphasising deadlines, availability, and time-sensitive scholarships converted better.</div>
+      <div class="market-signal">Key signal: urgency and scarcity</div>
+    </div>
+  </div>
+
+  <h2 class="s">The Five Product Decisions That Drove Global Scale</h2>
+
+  <ol class="num-list">
+    <li><div class="n">01</div><div><strong>Context-aware onboarding, not a single universal flow.</strong> We built onboarding as a decision tree, not a linear sequence. Based on a student&apos;s source country, intended destination, and application timeline, the app served a different first-session experience. A Nigerian student in the early exploration stage saw peer testimonials and destination country guides. A Pakistani student six weeks from an application deadline saw a document checklist and fast-track counsellor booking. Same app, different soul.</div></li>
+    <li><div class="n">02</div><div><strong>Performance as a feature, not a footnote.</strong> In markets like Bangladesh and parts of Sub-Saharan Africa, app performance was a conversion driver, not a nice-to-have. We introduced market-specific performance budgets &mdash; maximum APK size, maximum time to interactive, maximum image payload per screen &mdash; and treated exceeding them as a P1 product bug. Reducing app size by 30% in our Bangladesh build increased install-to-activation by 18%.</div></li>
+    <li><div class="n">03</div><div><strong>Trust signals localised by market, not just by language.</strong> Translation was table stakes. The harder work was localising <em>what trust looks like</em>. In India, trust came from institutional credibility &mdash; rankings, partnerships, and official accreditations. In Nigeria, trust came from social proof &mdash; &ldquo;2,400 Nigerian students placed at UK universities last year.&rdquo; In Pakistan, trust came from transparency &mdash; showing the exact process, timeline, and expected costs with no ambiguity. We built a trust signal framework that mapped content type to source market, and deployed it across all in-app surfaces.</div></li>
+    <li><div class="n">04</div><div><strong>Retention architecture built around journey stage, not calendar time.</strong> Standard retention playbooks measure Day 1, Day 7, Day 30 retention. For a product with a 12&ndash;18 month decision cycle, those metrics are nearly meaningless. A student who installs the app in September for an intake the following September does not need to be re-engaged in week 2 &mdash; they need to be re-engaged in February when shortlisting decisions typically start. We rebuilt our retention architecture around <em>decision stage</em>: Exploration, Shortlisting, Application, Pre-departure, and Post-arrival. Each stage had its own re-engagement triggers, content cadence, and success metrics.</div></li>
+    <li><div class="n">05</div><div><strong>Channel strategy localised to user behaviour, not platform preference.</strong> We defaulted to email-first for re-engagement because that is what every playbook recommends. Our data told a different story. In Pakistan and Bangladesh, WhatsApp outperformed email 4:1 on open rates and 6:1 on action rates. In India, in-app notifications combined with SMS outperformed WhatsApp for time-sensitive nudges. We built a channel preference model per source market and re-routed our entire re-engagement communication stack accordingly. Email dropped to a secondary channel in 60% of our markets.</div></li>
+  </ol>
+
+  <blockquote>
+    <p>&ldquo;Localisation is not a feature you add after you have built the product. It is a product principle that must be embedded from the first line of the architecture. The teams that treat it as translation work always end up rebuilding.&rdquo;</p>
+  </blockquote>
+
+  <h2 class="s">The Personalisation Engine That Made It Work</h2>
+
+  <p class="body">Serving 90 markets with bespoke product experiences is not operationally sustainable without a robust personalisation layer. We could not have a separate roadmap for each market. We needed a single platform that was intelligent enough to adapt.</p>
+
+  <p class="body">We built the <strong>Student Context Engine</strong> &mdash; a real-time personalisation system that maintained a profile for every student across four dimensions: <em>origin context</em> (source country, language, cultural decision-making norms), <em>intent context</em> (destination country, programme type, application timeline), <em>journey stage</em> (Exploration through Post-arrival), and <em>engagement signal</em> (session frequency, content consumption depth, counsellor interaction history).</p>
+
+  <p class="body">Every content piece, every notification, every in-app recommendation, and every search result ranking was filtered through this four-dimensional context. A student in Nigeria, exploring UK universities, six months from their target intake, who had been reading scholarship content, saw a completely different app experience from a student in India, shortlisting Australian universities, 10 weeks from application deadline, who had been engaging with visa content. <strong>Same product, different experience, at 1M+ user scale.</strong></p>
+
+  <h2 class="s">What the Funnel Looked Like Across 90 Markets</h2>
+
+  <table class="impact-table">
+    <thead>
+      <tr><th>Funnel Stage</th><th>Global Baseline</th><th>Key Variable by Market</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><strong>Install to activation</strong></td><td>62% global average</td><td>App size and load time (low-connectivity markets); onboarding hook strength (high-competition markets)</td></tr>
+      <tr><td><strong>Activation to counsellor booking</strong></td><td>28% global average</td><td>Trust signal type (social proof vs. institutional credibility vs. transparency)</td></tr>
+      <tr><td><strong>Counsellor booking to application</strong></td><td>54% global average</td><td>Decision cycle length; family involvement complexity; financial readiness</td></tr>
+      <tr><td><strong>Application to enrolment</strong></td><td>71% global average</td><td>Compliance readiness; funding access; visa success rate by nationality</td></tr>
+      <tr><td><strong>30-day retention</strong></td><td>41% global average</td><td>Journey stage alignment; channel preference; content relevance to current decision phase</td></tr>
+    </tbody>
+  </table>
+
+  <h2 class="s">What We Learned</h2>
+
+  <div class="learnings">
+    <div class="learning">
+      <div class="learning-num">01</div>
+      <div class="learning-text"><strong>Global scale requires a single product with a configurable soul.</strong> The temptation is to build market-specific variants. The reality is that fragmentation kills velocity. The right architecture is one product with a powerful context layer that drives market-specific behaviour without requiring market-specific codebases. Invest in the context engine early &mdash; it pays compound returns.</div>
+    </div>
+    <div class="learning">
+      <div class="learning-num">02</div>
+      <div class="learning-text"><strong>Retention metrics must match the product&apos;s natural time horizon.</strong> Measuring D7 retention for a product with an 18-month decision cycle is a category error. Define retention around journey stages and decision milestones, not calendar time. The right question is not &ldquo;are they coming back this week&rdquo; but &ldquo;are they still on track toward their study goal?&rdquo;</div>
+    </div>
+    <div class="learning">
+      <div class="learning-num">03</div>
+      <div class="learning-text"><strong>Trust is cultural, not universal.</strong> What builds confidence in one geography can actively erode it in another. Ranking tables and accreditation logos signal credibility in some markets and feel overwhelming in others. Peer testimonials that feel reassuring in high-referral markets feel unverified in low-trust-of-strangers markets. Map your trust signals per market before scaling your content strategy.</div>
+    </div>
+    <div class="learning">
+      <div class="learning-num">04</div>
+      <div class="learning-text"><strong>Performance is a first-class product metric in emerging markets.</strong> It is easy to build and test on high-end devices with strong connectivity. The students you most want to reach often have neither. Build performance budgets into your product definition, not your engineering backlog. Treat a slow load time in a key market as a product failure, not a technical debt item.</div>
+    </div>
+    <div class="learning">
+      <div class="learning-num">05</div>
+      <div class="learning-text"><strong>Your re-engagement channel is a product decision, not a marketing decision.</strong> The platform you use to bring users back to your product must match where they actually live their digital lives. In 2024, for a significant portion of the world, that is WhatsApp &mdash; not email. Building channel flexibility into your retention architecture is as important as building content quality into your notifications.</div>
+    </div>
+  </div>
+
+  <h2 class="s">The Outcomes</h2>
+
+  <div class="outcome-row">
+    <div class="outcome-pill">&#10003;&nbsp; 1M+ users across 90+ countries</div>
+    <div class="outcome-pill">&#10003;&nbsp; Context-aware onboarding live across 6 market segments</div>
+    <div class="outcome-pill">&#10003;&nbsp; 18% install-to-activation uplift in low-connectivity markets</div>
+    <div class="outcome-pill">&#10003;&nbsp; WhatsApp re-engagement deployed across 60% of source markets</div>
+    <div class="outcome-pill">&#10003;&nbsp; Journey-stage retention architecture replaced calendar-based model</div>
+    <div class="outcome-pill">&#10003;&nbsp; Student Context Engine personalising at 1M+ user scale</div>
+    <div class="outcome-pill">&#10003;&nbsp; Single codebase serving 90+ market configurations</div>
+  </div>
+
+  <h2 class="s">The Bigger Lesson</h2>
+
+  <p class="body">Scaling a consumer product globally is not a growth problem. It is a <strong>product architecture problem</strong>. The teams that try to solve it with more paid acquisition in more markets always hit the same ceiling: the product was not built for the user they are trying to acquire. The teams that solve it by building intelligent context into the product foundation &mdash; what the user sees, how fast it loads, what builds their trust, when and how it re-engages them &mdash; find that global scale becomes a compounding advantage rather than an ever-increasing cost.</p>
+
+  <p class="body">One million users across 90 countries is not one product used by one million people in the same way. It is one product that has learned to speak in a million different registers &mdash; and has the architecture to keep learning.</p>
+
+  <div style="margin-top:56px;padding-top:32px;border-top:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:20px;">
+    <div>
+      <div style="font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:16px;color:var(--ink);margin-bottom:4px;">Archisman Sarkar</div>
+      <div style="font-size:12px;color:var(--faint);">Director of Product &middot; Edvoy &middot; Hyderabad, India</div>
+      <div style="font-size:12px;color:var(--faint);margin-top:2px;">me@reacharchisman.com</div>
+    </div>
+    <a href="index.html#insights" style="display:inline-flex;align-items:center;gap:8px;padding:12px 24px;background:var(--indigo);color:#fff;text-decoration:none;border-radius:8px;font-size:13px;font-weight:500;font-family:'Inter',sans-serif;">&#8592; Back to Insights</a>
+  </div>
+
+</div>
+
+<footer>
+  <div class="ft">&#169; 2025 Archisman Sarkar &middot; <span>reacharchisman.com</span></div>
+  <div class="footer-nav">
+    <a href="index.html">Home</a>
+    <a href="index.html#about">About</a>
+    <a href="index.html#ai-projects">AI Projects</a>
+    <a href="index.html#insights">Insights</a>
+    <a href="index.html#contact">Contact</a>
+  </div>
+</footer>
+
+</body>
+</html>
